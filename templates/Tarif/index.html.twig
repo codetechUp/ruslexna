@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %} {% block body %}
+<div class="bande" style="background-color: #018786">
+</div>
+
+<div style="background-color:#E8E8E6">
+    <div class="container">
+        <p class="text-center"> {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endfor %}</p>
+    </div>
+    <!-- Contenedor -->
+    <div class="container p-0 ">
+        <div class="row">
+        
+        {% for pack in packs %}
+        <div class="col-lg-4 col-md-4 col-sm-12">
+              {% if pack.libelle == "PLATINIUM" %}
+                <div class="pricetable pt-2">
+                    <h3 class=" titleprice1 text-center font-weight-bold ">{{ pack.libelle }}</h3>
+                    <div class="ligne1 "></div>
+                    <p class="text-center " style="color:gray ">
+                        <b>MODULES FULL ACCÉS</b> <br> Accés Total
+                    </p>
+                    <div class="price1 ">
+
+                        <div class="priceprice pt-3 "><span class=" font-weight-bold " style="font-weight: bold;font-size:xx-large; ">{{ pack.price|number_format( null ,null,",") }} FCFA</span></div>
+                    </div>
+                    <div class="princecondition mt-4 ">
+                        <div class="ligne "></div>
+                        <p>2 à 5 comptes remise 10%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>6 à 10 comptes remise 25%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>11 comptes et plus 50%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>Assistance: Tel et Email
+                        </p>
+                    </div>
+                    <div class="priceaction text-center m-3" style="color:white ">
+                        <a class='btn btn-price1'  href="{{path('paiement',{ id : pack.id})}}" style="color:white;width: 200px;border-radius: 4%; "  target="_blank">Je m'abonne</a>
+                    </div>
+                    </div>
+                     {% elseif pack.libelle == "SILVER" %}
+                      <div class="pricetable pt-2">
+                    <h3 class=" titleprice2 text-center font-weight-bold ">{{ pack.libelle }}</h3>
+                    <div class="ligne2 "></div>
+                    <p class="text-center " style="color:gray ">
+                        Accés Modules: <b>Juridique</b> ,<b>Fiscal</b> <br> Option: <b>Affaires</b> ou <b>Social</b>
+                    </p>
+                    <div class="price2 ">
+
+                        <div class="priceprice pt-3 "><span class=" font-weight-bold " style="font-weight: bold;font-size:xx-large; ">{{ pack.price|number_format( null ,null,",") }} FCFA</span></div>
+                    </div>
+                    <div class="princecondition mt-4 ">
+                        <div class="ligne "></div>
+                        <p>2 à 5 comptes remise 10%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>6 à 10 comptes remise 25%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>11 comptes et plus 50%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>Assistance: Email
+                        </p>
+                    </div>
+                    <div class="priceaction text-center m-3" style="color:white ">
+                        <a class='btn btn-price2' href="{{path('paiement',{ id : pack.id})}}" style="color:white;width: 200px;border-radius: 4%; ">Je m'abonne</a>
+                    </div>
+                </div>
+                {% elseif pack.libelle == "GOLD" %}
+                <div class="pricetable pt-2">
+                    <h3 class=" titleprice3 text-center font-weight-bold ">{{ pack.libelle }}</h3>
+                    <div class="ligne3 "></div>
+                    <p class="text-center " style="color:gray ">
+                        Accés Modules: <b>Juridique</b> <br> Accés Total Juridique </p>
+                    <div class="price3 ">
+
+                        <div class="priceprice pt-3 "><span class=" font-weight-bold " style="font-weight: bold;font-size:xx-large; ">{{ pack.price|number_format( null ,null,",") }} FCFA</span></div>
+                    </div>
+                    <div class="princecondition mt-4 ">
+                        <div class="ligne "></div>
+                        <p>5 à 10 comptes remise 5%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>11 et plus comptes remise 10%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>11 comptes et plus 50%
+                        </p>
+                        <div class="ligne "></div>
+                        <p>Assistance:Email
+                        </p>
+                    </div>
+                    <div class="priceaction text-center m-3" style="color:white ">
+                        <a class='btn btn-price3' href="{{path('paiement',{ id : pack.id})}}" style="color:white;width: 200px;border-radius: 4%; ">Je m'abonne</a>
+                    </div>
+                </div>
+             {% endif %}  
+        </div>
+        {% endfor %}   
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}

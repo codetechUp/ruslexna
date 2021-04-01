@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta charset="UTF-8">
+    
+    <title>{% block title %} Nasrulex {% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="{{asset('assets/img/Nasurlex-logo.png')}}" />
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+      <link rel="stylesheet" href="{{ asset('style.js') }}">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{asset('assets/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{asset('assets/lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/lib/animate/animate.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> {% block stylesheets %} {% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+  <!--  LOADER -->
+    <div id="preloader">
+      <div class="preloader" >  <img src="images/loader.gif" alt="">
+  <!--    <img  style="height:83px" src="{{asset('assets/img/Nasurlex-logo.png')}}" class="img-fluid" alt="">
+    LOADER --> </div>
+    </div><!-- end loader -->
+    <!-- END LOADER -->
+<header id="header2" class="text-center "  >
+    <div class="container text-center">
+      <nav class="main-nav ">
+        <ul class="text-center float-right ml-3">
+
+         
+        {% if app.user %}
+        {% if app.user.role =="ROLE_USER" %}
+        <li >
+            <a class="text-dark cont" href="{{path('profil')}}"></i>Mon Compte</a>
+        </li>
+        {% endif %}
+        {% if app.user.role =="ROLE_ADMIN" %}
+        <li >
+            <a class="text-dark  cont dash" href="{{path('dashbord')}}"></i>DashBord</a>
+        </li>
+        {% endif %}
+
+        <li >
+            <a class="text-dark  cont dec" href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
+        </li>
+        {% else %}
+    
+        <li class=" con {% if login is defined %} active {%  endif %}">
+            <a  href="{{path('login')}}"></i>Connexion</a>
+        </li>
+        <li class="ins {% if  connection is defined %}active{% endif %}">
+            <a  href="{{path('inscription')}}"><i class="far fa-registered"></i>Inscription</a>
+        </li>
+        {% endif %}
+         <li >
+            <a class="text-dark" href="{{path('tarif')}}"><i class="fab fa-adobe"></i>Nos Tarifs</a>
+        </li>
+    </ul>
+
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+  </header>
+
+
+<header style="height:14%" id="header"   >
+    <div class="container">
+
+
+     
+     <div class="pb-3 row no-gutters clients-wrap clearfix wow fadeInUp">
+
+            <div class="col-lg-3 col-md-4 col-sm-3 col-xs-3  col-3">
+                <div class="client-logo">
+                    <img style="height:83px" src="{{asset('assets/img/Nasurlex-logo.png')}}" class="img-fluid" alt="">
+                </div>
+            </div>
+
+        <div class="col-lg-9 col-md-8  col-sm-3 col-xs-3 mt-4">
+            <nav class="main-nav float-right d-none d-lg-block" >
+        <ul>
+          <li class="{% if home is defined %} active {%  endif %}"><a href="/">Accueil</a></li>
+
+         {% for cat in categories %}
+          <li class="drop-down"><a href="">{{ cat.libelle }}</a>
+            <ul>
+            {% for sousCat in cat.sousCategorie %}
+              <li><a href="#">{{ sousCat.libelle }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>  
+          {% endfor %}
+
+        </ul>
+      </nav>
+      </div><!-- .main-nav -->
+    </div>
+
+      
+      
+    </div>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      
+
+     
+  </header>
+<script>
+
+    function scroller(key) {
+    var elm = document.querySelector('#scroll' + key);
+    elm.classList.toggle("scroll");
+};
+</script>
+
+  <a href="#" style="margin-top:-19px" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+{% block body %} {% endblock %} {% block footer %}
+<!-- Footer -->
+<footer  class="  page-footer font-small  text-white ">
+    <div style="background-color: 	  #018786">
+        <div class="container">
+            <!-- Grid row-->
+            <div class="row py-4 d-flex align-items-center ">
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Connectez-vous avec nous sur les réseaux sociaux!</h6>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-7 text-center text-md-right rs">
+
+                    <!-- Facebook -->
+                    <a class="fb-ic" href="#!">
+                        <i class="fab fa-facebook-f white-text mr-4"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic" href="#!">
+                        <i class="fab fa-twitter white-text mr-4"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic" href="#!">
+                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic" href="#!">
+                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic" href="#!">
+                        <i class="fab fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5 ">
+
+        <!-- Grid row -->
+        <div class="row mt-3">
+
+            <!-- Grid column -->
+             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 juri">
+
+                <!-- Content -->
+                <p><img src="{{asset('assets/img/Nasurlex-logo.png')}}"</p>
+
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4  text-dark">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Qui sommes nous</h6>
+                <hr class=" accent-2 mb-4 mt-0 d-inline-block mx- " style="width: 60px;">
+                <p>
+                    <a href="#!">À propos de NASRULEX Senegal</a>
+                </p>
+                <p>
+                    <a href="#!">Actualités</a>
+                </p>
+                <p>
+                    <a href="#!">Nos Abonnements</a>
+                </p>
+                <p>
+                    <a href="#!">Nous contacter</a>
+                </p>
+                <p>
+                    <a href="#!">FAQ</a>
+                </p>
+
+            </div>
+
+
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4  text-dark">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Services</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <a href="#!">Juridique</a>
+                </p>
+                <p>
+                    <a href="#!">Fiscal</a>
+                </p>
+                <p>
+                    <a href="#!">Social</a>
+                </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-dark">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Contacts</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <i class="fas fa-home mr-3"></i> Senegal,Dakar,Almadies nº648</p>
+                <p>
+                    <i class="fas fa-envelope mr-3"></i>Admin@nasrulex.com</p>
+                <p>
+                    <i class="fas fa-phone mr-3"></i> + 221 77 377 77 66</p>
+                <p>
+                    <i class="fas fa-print mr-3"></i> +221 338 95 57 76 </p>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+
+    <div style="background-color:   #018786;" class="text-center py-3">{{ date }} Nasrulex tous les droits reservés.Developpé Par : DUE DILIGENCE TECHOLOGY
+
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+
+{% endblock %} {% block javascripts %} {% endblock %}
+ <!-- JavaScript Libraries -->
+  <script src="{{asset('assets/lib/jquery/jquery.min.js')}}"></script>
+ <script src="{{asset('assets/lib/easing/easing.min.js')}}"></script>
+  <script src="{{asset('assets/lib/mobile-nav/mobile-nav.js')}}"></script>
+  <script src="{{asset('assets/lib/wow/wow.min.js')}}"></script>
+  <script src="{{asset('assets/lib/waypoints/waypoints.min.js')}}"></script>
+  <script src="{{asset('assets/lib/counterup/counterup.min.js')}}"></script>
+  <script src="{{asset('assets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('assets/lib/isotope/isotope.pkgd.min.js')}}"></script>
+  <script src="{{asset('assets/lib/lightbox/js/lightbox.min.js')}}"></script>
+  <!-- Contact Form JavaScript File -->
+
+  <!-- Template Main Javascript File -->
+  <script src="{{asset('assets/js/main.js')}}"></script>
+</body>
+
+</html>

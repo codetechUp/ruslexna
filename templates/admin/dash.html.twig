@@ -1,0 +1,171 @@
+{% extends 'admin.html.twig' %} {% block body %}
+
+<div class="">
+    <div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="mt-5 pt5">
+                    {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                    {% endfor %} {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        {% if app.user.role =="ROLE_ADMIN" %}
+        <div class="row text-center ">
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3 ">
+                    <a href="{{path('addDoc')}}" class="text-decoration-none">
+                        <div class="float-left"> <i style="color:#3c4474 ;" class="fas fa-file-upload fa-5x"></i>
+                        </div>
+                        <h4 class="mt-4" class="mt-4">Ajouter Docs</h4>
+                    </a>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3 ">
+                    <a href="{{path('addPack')}}">
+                        <div class="float-left">
+                            <i style="color:#3c4474 ;" class="fab fa-gg-circle fa-5x"></i>
+                        </div>
+                        <h4 class="mt-4">Ajouter un Packs</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3 ">
+                    <a href="{{path('Pack')}}">
+                        <div class="float-left">
+                            <i style="color:#3c4474 ;" class="fas fa-stop-circle fa-5x"></i>
+                        </div>
+                        <h4 class="mt-4">Les Packs</h4>
+                    </a>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3 ">
+                    <a href="{{path('passe')}}">
+                        <div class="float-left">
+                            <i style="color:#3c4474 ;" class="fas fa-lock fa-5x"></i>
+                        </div>
+                        <h4 class="mt-4">Mots de passe</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="/">
+                        <i style="color:#3c4474 ;" class="fa fa-hourglass fa-5x"></i>
+                        <h4 class="mt-4">Avenir ....</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="/">
+                        <i style="color:#3c4474 ;" class="fa fa-hourglass fa-5x"></i>
+                        <h4 class="mt-4">Avenir ....</h4>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+        {% endif %}
+        <!-- /. ROW  -->
+        {% if app.user.role =="ROLE_USER" %}
+        <div class="row text-center pad-top">
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="blank.html">
+                        <i style="color:#3c4474 ;" class="fa fa-clipboard fa-5x"></i>
+                        <h4 class="mt-4">Vos favoris</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="{{path('passe')}}">
+                        <i style="color:#3c4474 ;" class="fa fa-gear fa-5x"></i>
+                        <h4 class="mt-4"> Mots de passe</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div style="color:#3c4474 ;" class="card p-3 ">
+                    <a href="{{path('abonnement')}}">
+                        <i style="color:#3c4474 ;" class="fa fa-rocket fa-5x"></i>
+                        <h4 class="mt-4">Abonnements</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="blank.html">
+                        <i style="color:#3c4474 ;" class="fa fa-wechat fa-5x"></i>
+                        <h4 class="mt-4">Mailing</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="blank.html">
+                        <i style="color:#3c4474 ;" class="fa fa-bell-o fa-5x"></i>
+                        <h4 class="mt-4">Notifications </h4>
+                    </a>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 p-3">
+                <div class="card p-3">
+                    <a href="blank.html">
+                        <i style="color:#3c4474 ;" class="fa fa-user fa-5x"></i>
+                        <h4 class="mt-4">Register User</h4>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>{% endif %}
+    <!-- /. PAGE INNER  -->
+</div>
+
+{% endblock %}

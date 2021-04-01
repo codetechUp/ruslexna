@@ -1,0 +1,213 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+<div class="container-fluid reg1">
+
+    <div class="container col-lg-9 e pt-5 mt-5 reg">
+    <h4 class="text-white text-center txt"> MERCI DE VOUS INSCRIRE À NASRULEX !</h4>
+
+       
+        <div class="card shadow p-3 mb-5  rounded">
+
+<div class="container">
+         <p class="text-center"> {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endfor %}</p>
+    </div>
+            <div class="card-body">
+
+                      <form class="container needs-validation"  action="" method="post" novalidate>
+
+                      <h4><b><i class="far fa-id-card"></i></b> Utilisateur principal</h4>
+
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                           <label for="validationCustomUsername">civilite:</label>
+                            <select class="form-control"  name="civilite" id="exampleFormControlSelect1" required>
+                            <option ></option>
+                            <option value="Mr">Mr</option>
+                            <option   value="MD">MD</option>
+                            </select>
+                         <div class="invalid-feedback">
+                            civilite est requis
+                        </div>
+              
+
+                            <label for="validationCustomUsername">Prenom:</label>
+                            <input type="text" name="prenom" class="form-control" id="validationCustomUsername"  placeholder="Prenom" required>
+                           <div class="invalid-feedback">
+                          Prénom est requis
+                            </div>
+                          </div>
+
+
+
+                    <div class="col-md-6">
+                                <label for="validationCustomUsername">Nom:</label>
+                                <input type="text" name="username" class="form-control" id="validationCustomUsername"  placeholder="Nom" required>
+                               <div class="invalid-feedback">
+                                Nom est requis
+                                    </div>
+                        
+
+                            <label for="validationCustomUsername">telephone:</label>
+                            <input type="text" name="telephone" class="form-control" id="validationCustomUsername"  placeholder="Telephone" required>
+                           <div class="invalid-feedback">
+                          Telephone est requis
+                            </div>
+                            </div>
+                   </div>
+
+                <div class="tre">
+                    <hr>
+                </div>
+
+                <h4> <b><i class="fas fa-briefcase"></i></b> Raison sociale</h4>
+
+
+
+                 <div class="form-row">
+                    <div class="col-md-6">
+                           <label for="validationCustomUsername">Nom de votre structure :</label>
+                            <input type="text" name="nom_S" class="form-control" id="validationCustomUsername"  placeholder="Nom de votre structure" >
+                        
+              
+
+                            <label for="validationCustomUsername">Adresse de votre structure :</label>
+                            <input type="text" name="Adresse_S" class="form-control" id="validationCustomUsername"  placeholder="Adresse de votre structure ">
+                          
+                          </div>
+
+
+
+                    <div class="col-md-6">
+                                <label for="validationCustomUsername">Téléphone de votre structure :</label>
+                                <input type="text" name="telephone_S" class="form-control" id="validationCustomUsername"  placeholder="Téléphone de votre structure ">
+                              
+                        
+
+                            <label for="validationCustomUsername">Numéro d'identification fiscale: (Exp: 1234567/Y/Z/T/000)</label>
+                            <input type="text" name="numero_I_F" class="form-control" id="validationCustomUsername"  placeholder="Telephone" >
+                             <div class="t"> Rajoutez des zéro au début si besoin ! (Exp: 0004567/Y/Z/T/000)</div>
+
+                          
+                            </div>
+                   </div>
+
+                <div class="tre">
+                    <hr>
+                </div>
+
+
+                <h4><b><i class="fas fa-chalkboard-teacher"></i></b> Données de connexion</h4>
+
+
+               <div class="form-row">
+
+                    <div class="col-md-6">
+                     <label for="validationCustomUsername">Email :</label>
+                            <input type="text" name="email" class="form-control" id="validationCustomUsername"  placeholder="Votre Adresse  Email" required>
+                           <div class="invalid-feedback">
+                            Email est requis
+                            </div>
+
+
+                         <label for="validationCustomUsername">Mot de passe :</label>
+                            <input type="text" name="password" class="form-control" id="validationCustomUsername"  placeholder="Votre   Mot de passe " required>
+                           <div class="invalid-feedback">
+                            Email est requis
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                     <label for="validationCustomUsername">Code ou Voucher : </label>
+                            <input type="text" name="code" class="form-control" id="validationCustomUsername"  placeholder="Code ou Voucher ">
+                         
+
+
+                       <label for="validationCustomUsername">Confirmez le mot de passe :</label>
+                            <input type="text" name="confirm_password" class="form-control" id="validationCustomUsername"  placeholder="Confirmez le mot de passe " required>
+                           <div class="invalid-feedback">
+                          Confirmer le mot de passe est requis
+                            </div>
+                    </div>
+
+                   </div>
+
+                    <div class="tre">
+                    <hr>
+                </div>
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input  type="checkbox" id="invalidCheck" required>
+                        <label class="form-check-label" for="invalidCheck">
+         
+              <p> J'accepte<a href="condition"> les termes et conditions</a></p>
+          </label>
+                        <div class="invalid-feedback">
+                            vous devez accepter les termes et conditions
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-success   "> creer mon compte</button>
+
+                </div>
+
+                </form>
+
+
+
+
+
+               
+              
+
+
+
+
+
+
+            </div>
+        </div>
+        <div class="text-light m-1 p-2 ">
+            <p class="text-center">Si avez dejàs un conpte?<a href="login"> Identifiez-Vous </a></p>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
