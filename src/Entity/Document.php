@@ -43,6 +43,16 @@ class Document
      */
     private $souscat;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nature="YES";
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Nature", inversedBy="documents")
+     */
+    private $natures;
+
    
    
 
@@ -116,6 +126,30 @@ class Document
     public function setSouscat(SousCategorie $souscat): self
     {
         $this->souscat = $souscat;
+
+        return $this;
+    }
+
+    public function getNature(): ?string
+    {
+        return $this->nature;
+    }
+
+    public function setNature(string $nature): self
+    {
+        $this->nature = $nature;
+
+        return $this;
+    }
+
+    public function getNatures(): ?Nature
+    {
+        return $this->natures;
+    }
+
+    public function setNatures(?Nature $natures): self
+    {
+        $this->natures = $natures;
 
         return $this;
     }

@@ -45,6 +45,7 @@ class AdminController extends AbstractController
          //creation formulaire 
          $form=$this->createForm(DocumentType::class,$doc);
          //recuperation des donnees modifies
+        
          $form->handleRequest($req);
          if($form->isSubmitted() && $form->isValid()){
              $em=$this->getDoctrine()->getManager();

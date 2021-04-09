@@ -22,7 +22,7 @@ DOCTRINE FISCALE</h2>
                     <div class="form-group">
                         <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
                         <select style="border-width:0px !important;border:none!important; height:48px;" name="categorie" class="custom-select wow fadeInUp mr-sm-5" id="inlineFormCustomSelect" data-wow-delay="0.2s">
-                        <option value='' selected>Toutes Les Categories</options>
+                        <option value='' selected>Toutes les categories</options>
                         {% for cat in categories %}
                         <option value="{{ cat.id }}"><b>{{ cat.libelle }}</b></option>
                         {% for sousCat in cat.sousCategorie %}
@@ -299,7 +299,7 @@ Contactez-nous au : nasrulex@nasrulex.com </b> <a class="text-primary n">nasrule
     <div class="container">
 
         <header class="section-header">
-            <h3>Conseil d'experts</h3>
+            <h3>Témoignages</h3>
         </header>
 
         <div class="row justify-content-center">

@@ -100,6 +100,10 @@ class AppFixtures extends Fixture
         $SousCategorie19=new SousCategorie();
         $SousCategorie20=new SousCategorie();
         $SousCategorie21=new SousCategorie();
+        $SousCategorie22=new SousCategorie();
+        $SousCategorie23=new SousCategorie();
+        $SousCategorie24=new SousCategorie();
+        $SousCategorie25=new SousCategorie();
     
 
 
@@ -116,7 +120,7 @@ class AppFixtures extends Fixture
         $SousCategorie6->setLibelle('Conventions fiscals');
         $SousCategorie7->setLibelle('Lois');
         $SousCategorie8->setLibelle('Decrets');
-        $SousCategorie9->setLibelle('Arretés');
+        $SousCategorie9->setLibelle('Arrêtés');
         $SousCategorie10->setLibelle('Circulaires');
         $SousCategorie11->setLibelle('Doctrines');
         $SousCategorie12->setLibelle(' National');
@@ -129,6 +133,10 @@ class AppFixtures extends Fixture
         $SousCategorie19->setLibelle('Réglements');
         $SousCategorie20->setLibelle('Instructions/Avis');
         $SousCategorie21->setLibelle('Chartes');
+        $SousCategorie22->setLibelle('UEMOA/OHADA');
+        $SousCategorie23->setLibelle('Lois/Réglements');
+        $SousCategorie24->setLibelle('Instructions/Avis');
+        $SousCategorie25->setLibelle('Decrets/Arrêtés');
 
 
 
@@ -164,18 +172,18 @@ class AppFixtures extends Fixture
                     ->addSousCategorie($SousCategorie8)
                     ->addSousCategorie($SousCategorie9);
 
-        $categorie5->addSousCategorie($SousCategorie15)
-                    ->addSousCategorie($SousCategorie18);
+        $categorie5->addSousCategorie($SousCategorie17)
+                    ->addSousCategorie($SousCategorie22);
 
                     
-        $categorie6->addSousCategorie($SousCategorie19)
-                    ->addSousCategorie($SousCategorie20);
+        $categorie6->addSousCategorie($SousCategorie23)
+                    ->addSousCategorie($SousCategorie24);
 
 
 
         $categorie7->addSousCategorie($SousCategorie7)
-                    ->addSousCategorie($SousCategorie8)
-                    ->addSousCategorie($SousCategorie9);
+                    ->addSousCategorie($SousCategorie19)
+                    ->addSousCategorie($SousCategorie25);
                     
                     
                     
@@ -211,6 +219,10 @@ class AppFixtures extends Fixture
         $manager->persist($SousCategorie19);
         $manager->persist($SousCategorie20);
         $manager->persist($SousCategorie21);
+        $manager->persist($SousCategorie22);
+        $manager->persist($SousCategorie23);
+        $manager->persist($SousCategorie24);
+        $manager->persist($SousCategorie25);
        
         $manager->persist($pack1);
         $manager->persist($pack2);

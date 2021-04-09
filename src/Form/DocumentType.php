@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Nature;
 use App\Entity\Document;
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
@@ -25,6 +26,11 @@ class DocumentType extends AbstractType
                 'data_class' => null,
                 "label"=> "Le document",
                 "required"=> true])
+            ->add('natures',EntityType::class,[ 
+                    'class'=> Nature::class,
+                   'choice_label' => "libelle",
+                    
+                    "required"=> true])
             ->add('createdAt',BirthdayType::class,[ 
                 'data_class' => null,
                 "label"=> "Date de publication"])
