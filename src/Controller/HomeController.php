@@ -83,9 +83,9 @@ class HomeController extends AbstractController
             
             $user=$repuser->findOneBy(["email"=> $data["Email"]]);
             if(!$user){
-                $this->addFlash("danger","Veillez vous souscrire dans un autre packs! ");
+                $this->addFlash("danger","L 'utilisateur n'existe pas .Incrivez-vous! ");
 
-                return $this->redirectToRoute('incription');
+                return $this->redirectToRoute('inscription');
             }
             $token=$tk->generateToken();
     
@@ -172,7 +172,7 @@ if(!$user){
     $this->addFlash("success","Veillez vous connecter ou vous inscrire pour lire un document");
     return $this->redirectToRoute('login');
 }else{
-   if($user->getRole()!= "ROLE_ADMIN"){
+   if($user->getRole()!= "ROLE_ADMIN" && ($doc->getCategorie()!= true )){
     $subs=$user->getSubscriptions();
     if($subs  ){
         if($subs[count($subs)-1]){

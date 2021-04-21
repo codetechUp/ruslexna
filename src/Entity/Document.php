@@ -53,6 +53,11 @@ class Document
      */
     private $natures;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isFree;
+
    
    
 
@@ -150,6 +155,18 @@ class Document
     public function setNatures(?Nature $natures): self
     {
         $this->natures = $natures;
+
+        return $this;
+    }
+
+    public function getIsFree(): ?bool
+    {
+        return $this->isFree;
+    }
+
+    public function setIsFree(?bool $isFree): self
+    {
+        $this->isFree = $isFree;
 
         return $this;
     }

@@ -31,6 +31,7 @@ class DocumentType extends AbstractType
                    'choice_label' => "libelle",
                     
                     "required"=> true])
+            ->add('isFree')
             ->add('createdAt',BirthdayType::class,[ 
                 'data_class' => null,
                 "label"=> "Date de publication"])
