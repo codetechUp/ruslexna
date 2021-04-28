@@ -27,17 +27,36 @@ class HomeController extends AbstractController
     /**
      * @Route("", name="home")
      */
-    public function index(CategorieRepository $cat)
+    public function index(CategorieRepository $cat,DocumentRepository $doc)
     {
        // if($this->getUser()!=null){
      //       dd($this->getUser());
      //   }
      $categories=$cat->findAll();
+     $jur=$cat->findBy(['libelle'=> 'Juridique']);
+     $juridique=$doc->findByCat($jur);
+     $jur=$cat->findBy(['libelle'=> 'Fiscal']);
+     $fiscal=$doc->findByCat($jur);
+     $jur=$cat->findBy(['libelle'=> 'Foncier']);
+     $foncier=$doc->findByCat($jur);
+     $jur=$cat->findBy(['libelle'=> 'Social']);
+     $social=$doc->findByCat($jur);
+     $jur=$cat->findBy(['libelle'=> 'Banque']);
+     $banque=$doc->findByCat($jur);
+     $jur=$cat->findBy(['libelle'=> 'Affaire']);
+     $affaire=$doc->findByCat($jur);
+     
      //dd($categories);
         return $this->render('home/index.html.twig', [
             "categories"=> $categories,
             "date"=>date_format(new \DateTime(),"Y"),
-            "home"=>true
+            "home"=>true,
+            "juridique"=> $juridique,
+            "social"=> $social,
+            "banque"=> $banque,
+            "foncier"=> $foncier,
+            "fiscal"=> $fiscal,
+            "affaire"=> $affaire,
         ]);
     }
       /**
@@ -172,14 +191,15 @@ if(!$user){
     $this->addFlash("success","Veillez vous connecter ou vous inscrire pour lire un document");
     return $this->redirectToRoute('login');
 }else{
-   if($user->getRole()!= "ROLE_ADMIN" && ($doc->getCategorie()!= true )){
+    $doc=$repDoc->find($id);
+   if($user->getRole()!= "ROLE_ADMIN" && ($doc->getIsFree()!= true )){
     $subs=$user->getSubscriptions();
     if($subs  ){
         if($subs[count($subs)-1]){
            $sub= $subs[count($subs)-1];
            $datefin=$sub->getDateFin();
             if($datefin >= $jdate){
-                $doc=$repDoc->find($id);
+               
                 $cats=$doc->getCategorie()->getLibelle();
                 $catspack=$sub->getPack()->getCategories();
                 foreach($catspack as $catspack){

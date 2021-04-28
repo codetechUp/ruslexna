@@ -96,12 +96,27 @@ class DocumentRepository extends ServiceEntityRepository
         ->getResult()
     ;
 }
+
+
+
     }
+    public function findByCat($value)
+{
+    return $this->createQueryBuilder('d')
+        ->andWhere('d.categorie = :val')
+        ->setParameter('val', $value)
+        ->orderBy('d.id', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
+
     // /**
     //  * @return Document[] Returns an array of Document objects
     //  */
     /*
-    public function findByExampleField($value)
+    public function findByCat($value)
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')
