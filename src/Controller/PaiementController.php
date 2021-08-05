@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Subscription;
+use App\Repository\UserRepository;
 use App\Repository\PacksRepository;
 use Paydunya\Checkout\CheckoutInvoice;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,7 @@ class PaiementController extends AbstractController
     /**
      * @Route("/status/{idpack}/{iduser}", name="status")
      */
-    public function index($idpack,$iduser,PacksRepository $repac)
+    public function index($idpack,$iduser,PacksRepository $repac,UserRepository $repuser)
     {
         $em=$this->getDoctrine()->getManager();
         $co = new CheckoutInvoice();
@@ -26,8 +27,12 @@ class PaiementController extends AbstractController
             $m=$date->format('m');
             $datefin=new DateTime(($y+1)."-$m-$d");
             $subs=new Subscription();
-            $subs->setUser($this->getUser())
-                ->setPack($pack)
+            if($this->getUser()){
+                $subs->setUser($this->getUser()) ;
+            }else{
+                $subs->setUser($repuser->find($iduser));
+            }
+            $subs->setPack($pack)
                 ->setDateDebut(new DateTime())
                 ->setDateFin($datefin)
                 ->setLinkFacture($co->getReceiptUrl());

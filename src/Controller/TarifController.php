@@ -42,11 +42,11 @@ class TarifController extends AbstractController
        // dd("http://".$_SERVER['HTTP_HOST']."/status/$idpack/$iduser");
       // Store::setReturnUrl("https://".$_SERVER['HTTP_HOST']."/status/$idpack/$iduser");       
       Store::setReturnUrl("http://127.0.0.1:8000/status/".$idpack."/".$iduser);
-      Store::setLogoUrl("http://nasrulex.com/senjuridoc.jpg");
+      Store::setLogoUrl("https://nasrulex.com/assets/img/Nasurlex-logo.png");
 Store::setName("NASRULEX"); // Seul le nom est requis
 Store::setTagline("Plateforme de Documentation Juridique");
 Store::setPhoneNumber("+221 77 377 77 66");
-Store::setWebsiteUrl("http://nasrulex.com");
+Store::setWebsiteUrl("https://nasrulex.com");
            
         $price=$pack->getPrice();
        

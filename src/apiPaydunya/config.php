@@ -17,7 +17,7 @@ Setup::setPublicKey("live_public_eGHyRPJlnkWZpCRWoeaqorkgTcM");
 //Setup::setPrivateKey("test_private_NHEmeiZn3nUAyq0sYprqRhJlYxH");
 //Setup::setToken("FWqNtl4ydmUdpsCcSlKa");
 //Setup::setMode("test"); // Optionnel. Utilisez cette option pour les paiements tests.
-Store::setLogoUrl("http://nasrulex.com/senjuridoc.jpg");
+Store::setLogoUrl("https://nasrulex.com/assets/img/Nasurlex-logo.png");
 Store::setName("NASRULEX"); // Seul le nom est requis
 Store::setTagline("Plateforme de Documentation Juridique");
 Store::setPhoneNumber("+221 77 377 77 66");

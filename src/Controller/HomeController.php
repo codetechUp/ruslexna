@@ -413,7 +413,7 @@ if(!$user){
             $categories=$ca->findAll();
             $search=" ";
             $foncier="";
-            $affaires='';
+            $affaires="";
             return $this->render('home/try.html.twig', [
                 "mots"=>$search,
                 "categories"=>$categories,
@@ -424,7 +424,7 @@ if(!$user){
                "fiscal"=>$fiscal,
                'datepub'=>$datepub,
                "social"=>$social,
-               "affaire"=>$affaires,
+               "affaires"=>$affaires,
                "banque"=>$banque
                 ]);
         }
