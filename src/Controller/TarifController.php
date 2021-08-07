@@ -66,7 +66,7 @@ Store::setWebsiteUrl("https://nasrulex.com");
            dd($invoice->response_text);
         }
        }else{
-        $this->addFlash("success","Veillez vous inscrire avant de payer un pack");
+        $this->addFlash("success","Veuillez vous inscrire avant de payer un pack");
 
            return $this->redirectToRoute('inscription');
 

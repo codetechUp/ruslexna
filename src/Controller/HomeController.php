@@ -41,9 +41,9 @@ class HomeController extends AbstractController
      $foncier=$doc->findByCat($jur);
      $jur=$cat->findBy(['libelle'=> 'Social']);
      $social=$doc->findByCat($jur);
-     $jur=$cat->findBy(['libelle'=> 'Banque']);
+     $jur=$cat->findBy(['libelle'=> 'Banques']);
      $banque=$doc->findByCat($jur);
-     $jur=$cat->findBy(['libelle'=> 'Affaire']);
+     $jur=$cat->findBy(['libelle'=> 'Affaires']);
      $affaire=$doc->findByCat($jur);
      
      //dd($categories);
@@ -188,7 +188,7 @@ class HomeController extends AbstractController
         $jdate=new DateTime();
 //s'il n'est pas connecté
 if(!$user){
-    $this->addFlash("success","Veillez vous connecter ou vous inscrire pour lire un document");
+    $this->addFlash("success","Veuillez vous connecter ou vous inscrire pour lire un document");
     return $this->redirectToRoute('login');
 }else{
     $doc=$repDoc->find($id);
@@ -218,18 +218,18 @@ if(!$user){
                       "categories"=> $categories ]);
                 }else{
                     $this->addFlash("success","Votre abonnement ne vous permet pas de consulter ce document ");
-                    $this->addFlash("success","Veillez vous souscrire dans un autre packs! ");
+                    $this->addFlash("success","Veuillez vous souscrire dans un autre packs! ");
 
                 return $this->redirectToRoute('tarif');
                 }
             }
             else{
-                $this->addFlash("success","Veillez vous souscrire dans un de nos packs votre abonnement a expiré");
+                $this->addFlash("success","Veuillez vous souscrire dans un de nos packs votre abonnement a expiré");
                 return $this->redirectToRoute('tarif');
             }
         }
     }
-        $this->addFlash("success","Veillez vous souscrire dans un de nos packs");
+        $this->addFlash("success","Veuillez vous souscrire dans un de nos packs");
     return $this->redirectToRoute('tarif');
    }else{
     $categories=$cat->findAll();

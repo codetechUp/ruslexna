@@ -20,11 +20,12 @@ class SecurityController extends AbstractController
         if($error!= null){
             if($error->getMessage()=="User account is disabled."){
                 
-                $error=" Compte non validé . Veillez regarder sur vos mails ou spams pour le validé ";
+                $error=" Compte non validé . Veuillez regarder sur vos mails ou spams pour le validé ";
             }else{
                 
-                $error="Mot de Pass ou Email non valide";
+                $error="Mot de Passe ou Email non valide";
             }
+            $this->addFlash("danger",$error);
         }
        
         return $this->render('security/login.html.twig',[
