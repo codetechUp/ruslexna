@@ -239,7 +239,8 @@ if(!$user){
     $doc->setFichier($pdf);
    return $this->render('home/pdf.html.twig', [
       "doc"=>$doc,
-      "categories"=> $categories ]);
+      "categories"=> $categories,
+      "date"=>date_format(new \DateTime(),"Y") ]);
    }
     
     
@@ -263,10 +264,13 @@ if(!$user){
             if(strstr($cat,'-')){
                 
                 $ex=explode('-',$cat);
-               
+               //On recuppere le categorie
                 $categorie=$ca->find($ex[0]);
+                //Ici le sous categorie
                 $souscategorie=$ca->find($ex[1]);
+                //Si le champs date de publication n'est pas renseigné
                 if(!empty($datepub)){
+                    //Search doc est une fonction cree dans le repository des documents
                     $docs = $doc->searchDoc($search,$cat,$souscategorie,$datepub);
                 }else{
                     $docs = $doc->searchDoc($search,$cat,$souscategorie);

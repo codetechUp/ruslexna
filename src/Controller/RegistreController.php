@@ -36,7 +36,7 @@ class RegistreController extends AbstractController
              ->setTelephoneS($request->request->get('telephone_S'))
              ->setNumeroIF($request->request->get('numero_I_F'))
              ->setEmail($request->request->get('email'))
-             ->setCode($request->request->get('code'))
+             ->setCode("00")
              ->setRole(("ROLE_USER"));
 
              $user->setActivationToken(md5(uniqid()));
