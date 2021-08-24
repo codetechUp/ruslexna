@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Packs;
 use App\Form\PackType;
 use App\Entity\Document;
 use App\Form\DocumentType;
+use App\Entity\Subscription;
+use App\Repository\UserRepository;
 use App\Repository\PacksRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\SousCategorieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
@@ -220,4 +226,75 @@ return $this->render('admin/editpacks.html.twig', [
 
 ]);
 }
+
+
+/**
+* @Route("/admin/pack/offrir", name="offrir")
+*/
+public function offrir(UserRepository $repo,Request $request)
+{
+    $em=$this->getDoctrine()->getManager();
+    $form = $this->createFormBuilder(null)
+    ->add('email',TextType::class)
+    ->add('pack', EntityType::class, [
+        'class'=> Packs::class,
+        'choice_label' => "libelle",
+    ])
+    ->add('offrir',SubmitType::class)
+    ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $query=$form->get('email')->getData();
+        $pack=$form->get('pack')->getData();
+       $user=$repo->findBy(["email"=> $query]);  
+            
+       if($user){
+           
+        $date=new DateTime();
+            $y=$date->format('Y');
+            $d=$date->format('d');
+            $m=$date->format('m');
+            $datefin=new DateTime(($y+1)."-$m-$d");
+            $subs=new Subscription();
+            
+            $subs->setUser($user[0]);
+            
+            $subs->setPack($pack)
+                ->setDateDebut(new DateTime())
+                ->setDateFin($datefin)
+                ->setLinkFacture("https://nasrulex.com");
+            //dd($subs);
+
+                $em->persist($subs);
+                $em->flush();
+                $this->addFlash("success","Pack Offert ");
+            return $this->redirectToRoute('dashbord');
+       }else{
+        $this->addFlash("danger","L' email introuvable");
+
+        //Redirection
+        return $this->redirectToRoute('offrir');
+
+       }
+    }
+
+    return $this->render('admin/offrir.html.twig', [
+        'form' => $form->createView(),
+    
+    ]);
+}
+
+
+
+
+
+
+
+
+
+
+
 }
