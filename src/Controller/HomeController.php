@@ -3,9 +3,11 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Contact;
 use App\Form\ResetPassType;
 use FOS\UserBundle\Mailer\Mailer;
 use App\Repository\UserRepository;
+use Symfony\Component\Mime\Message;
 use App\Repository\DocumentRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\SousCategorieRepository;
@@ -27,11 +29,16 @@ class HomeController extends AbstractController
     /**
      * @Route("", name="home")
      */
-    public function index(CategorieRepository $cat,DocumentRepository $doc)
+    public function index(\Swift_Mailer $mailer,CategorieRepository $cat,DocumentRepository $doc,Request $request)
     {
        // if($this->getUser()!=null){
      //       dd($this->getUser());
      //   }
+     $sms="non";
+     $entityManager = $this->getDoctrine()->getManager();
+
+     
+
      $categories=$cat->findAll();
      $jur=$cat->findBy(['libelle'=> 'Juridique']);
      $juridique=$doc->findByCat($jur);
@@ -45,9 +52,48 @@ class HomeController extends AbstractController
      $banque=$doc->findByCat($jur);
      $jur=$cat->findBy(['libelle'=> 'Affaires']);
      $affaire=$doc->findByCat($jur);
+
+     if ($request->request->count()>2) {
+        $contact = new Contact();
+        
+       if(($request->request->get('nomComplet')==null) || ($request->request->get('username')==null) || ($request->request->get('telephone')==null) || ($request->request->get('message')==null)){
+        $this->addFlash("dangerContact","Veuillez remplir tous les champs");
+        //return $this->redirectToRoute('home');
+
+       }else{
+           
+        $contact->setNomComplet($request->request->get('nomComplet'))
+        ->setUsername($request->request->get('username'))
+        ->setTelephone($request->request->get('telephone'))
+        ->setMessage($request->request->get('message'));
+     
+        $message = (new \Swift_Message('Nasrulex Message'))
+                 // On attribue l'expéditeur
+                 ->setFrom([$request->request->get('username') => $request->request->get('nomComplet')])
+                 // On attribue le destinataire
+                 ->setTo("papasa97@gmail.com")
+                 // On crée le texte avec la vue
+                 ->setBody(
+                     $this->renderView(
+                         'email/emailuser.html.twig', ['message' =>$request->request->get('message')]
+                     ),
+                     'text/html'
+                 )
+             ;
+             $mailer->send($message);
+             $sms="yes";
+             $entityManager->persist($contact);
+        $entityManager->flush();
+ 
+         $this->addFlash("success","Message envoyé avec succés ,");
+         return $this->redirectToRoute('home');
+       }}
+
+ 
      
      //dd($categories);
         return $this->render('home/index.html.twig', [
+            "contact"=> $sms,
             "categories"=> $categories,
             "date"=>date_format(new \DateTime(),"Y"),
             "home"=>true,

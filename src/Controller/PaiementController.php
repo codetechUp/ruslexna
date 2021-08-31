@@ -40,6 +40,9 @@ class PaiementController extends AbstractController
                 $em->flush();
                 $this->addFlash("success","Votre abonnement est validé avec succés ");
             return $this->redirectToRoute('abonnement');
+        }else{
+            $this->addFlash("danger","Solde Insufisant ,Recharger votre compte si vous penser que c'est une erreur Contacter nous");
+            return $this->redirectToRoute('dashbord');
         }
         return $this->render('paiement/index.html.twig', [
             'controller_name' => 'PaiementController',

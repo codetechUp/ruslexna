@@ -233,6 +233,13 @@ return $this->render('admin/editpacks.html.twig', [
 */
 public function offrir(UserRepository $repo,Request $request)
 {
+    $me=$this->getUser();
+    $role=$me->getRoles()[0];
+    
+    if(!($role=="ROLE_ADMIN" || $role=="ROLE_DEV") ){
+        $this->addFlash("danger","Pas autorisé ");
+        return $this->redirectToRoute('dashbord');
+    }
     $em=$this->getDoctrine()->getManager();
     $form = $this->createFormBuilder(null)
     ->add('email',TextType::class)

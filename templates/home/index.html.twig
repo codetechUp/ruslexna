@@ -83,8 +83,8 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
             <div class=" wow bounceInUp">
                 
               <div class="">
-                <h5 class="text-center text-light text-bold">AVOIR UN COMPTE NASRULEX</h5>
-                <p class="text-center text-light"><i class="fas fa-arrow-circle-right"></i> Inscription <br> <i class="fas fa-arrow-circle-right"></i> Connection<br>
+                <h5 class=" text-light text-bold">AVOIR UN COMPTE NASRULEX</h5>
+                <p class=" text-light"><i class="fas fa-arrow-circle-right"></i> Inscription <br> <i class="fas fa-arrow-circle-right"></i> Connection<br>
               </p>
                 
               </div>
@@ -93,11 +93,11 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
 
           <div class="col-lg-4 mb-4">
             <div class=" m wow bounceInUp">
-                      <div class="text-center m-5"> <i style="font-size:55px;color:white" class="fas fa-cube"></i></i>
+                      <div class=" m-5"> <i style="font-size:55px;color:white" class="fas fa-cube"></i></i>
                   </div>
               <div class="c">
-                <h5 class="text-center text-light text-bold">CHOISIR UN PACK </h5>
-                <p class="text-center text-light"> <i class="fas fa-arrow-circle-right"></i> Le pack Platinium,<br><i class="fas fa-arrow-circle-right"></i> Le pack Silver,<br>
+                <h5 class=" text-light text-bold">CHOISIR UN PACK </h5>
+                <p class=" text-light"> <i class="fas fa-arrow-circle-right"></i> Le pack Platinium,<br><i class="fas fa-arrow-circle-right"></i> Le pack Silver,<br>
                         <i class="fas fa-arrow-circle-right"></i> Le pack Gold.<br>  </p>
                 
               </div>
@@ -106,11 +106,11 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
 
           <div class="col-lg-4 mb-4">
             <div class=" m wow bounceInUp">
-                    <div class="text-center m-5"> <i style="font-size:55px;color:white" class="fas fa-credit-card "></i></i>
+                    <div class=" m-5"> <i style="font-size:55px;color:white" class="fas fa-credit-card "></i></i>
                   </div>
               <div class="c">
-                <h5 class="text-center text-light text-bold"> PASSER AU PAYEMENT  </h5>
-                <p class="text-center text-light"> <i class="fas fa-arrow-circle-right"></i> Inscription <br> <i class="fas fa-arrow-circle-right"></i> Connection<br>
+                <h5 class=" text-light text-bold"> PASSER AU PAYEMENT  </h5>
+                <p class=" text-light"> <i class="fas fa-arrow-circle-right"></i> Inscription <br> <i class="fas fa-arrow-circle-right"></i> Connection<br>
                </p>
                 
               </div>
@@ -321,7 +321,7 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
         </header>
 
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 <div class="owl-carousel testimonials-carousel wow fadeInUp">
 
@@ -343,11 +343,14 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
                         </p>
                     </div>
                     <div class="testimonial-item">
-                        <img src="{{('assets/img/testimonial-5.jpg')}}" class="testimonial-img" alt="">
+                        <img src="{{('assets/img/testimonial-2.jpg')}}" class="testimonial-img" alt="">
                         <h3>Monsieur Mouhamadou Lamine SY</h3>
                         <h4>Inspecteur principal des impôts. Conseil Technique du Directeur Général des Impôts⁃ Docteur Aliou NIANG - Docteur en Droit. Spécialiste en politique commerciale.</h4>
                         <p>
-                            Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                        NASRULEX est une banque de textes juridiques nationaux,régionaux et internationaux qui s’appliquent à toutes les activités
+économiques (commerciales, bancaires, foncières, assurances…). Il s’agit d’une plateforme d’information et de veille juridique novatrice
+et complète qui réponde aux besoins immédiats et quotidiens des professionnels des chercheurs et des Étudiants de l’Etat et les
+collectivités locales
                         </p>
                     </div>
                     <div class="testimonial-item">
@@ -392,7 +395,7 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
       <img class="d-block w-100"  src="{{ asset('pub.png')}}"  alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-90"  src="{{ asset('baniere.png')}}"  alt="Third slide">
+      <img class="d-block w-100"  src="{{ asset('monbaniere.png')}}"  alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -414,8 +417,24 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
         <div class="section-header">
             <h3>Contactez-nous</h3>
         </div>
+<div class="row">
+            <div class="col-lg-12 ">
+                <div class="mt-5 pt5">
+                    {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                    {% endfor %} {% for message in app.flashes('dangerContact') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
 
+            </div>
+        </div>
         <div class="row wow fadeInUp">
+
 
             <div class="col-lg-2">
                 <div class="map mb-4 mb-lg-0">
@@ -442,19 +461,19 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
                 <div class="form">
                     <div id="sendmessage">Votre message a été bien envoyé</div>
                     <div id="errormessage"></div>
-                    <form action="{{path('contact.add')}}" method="post">
+                    <form action="/" method="post">
                         <div class="form-row">
                             <div class="form-group col-lg-6">
-                                <input type="text" name="nomComplet" class="form-control" id="name" placeholder="Prenom et Nom" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text" name="nomComplet" class="form-control" id="name" placeholder="Prenom et Nom" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
                                 <div class="validation"></div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="email" class="form-control" name="username" id="email" placeholder="Votre email" data-rule="email" data-msg="Please enter a valid email" />
+                                <input type="email" class="form-control" name="username" id="email" placeholder="Votre email" data-rule="email" data-msg="Please enter a valid email" required />
                                 <div class="validation"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="telephone" id="subject" placeholder="Numero Telephone" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <input type="number" class="form-control" name="telephone" id="subject" placeholder="Numero Telephone" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required />
                             <div class="validation"></div>
                         </div>
                         <div class="form-group">
@@ -477,7 +496,11 @@ réel, partout et en un clic de l’ensemble des textes législatifs et règleme
 </section>
 <!-- #contact -->
 
-
+{% if contact == "yes" %}      <script type="text/javascript">
+   
+       alert("Message Envoyé avec Succés");
+  
+</script>        {% endif %}
 
 
 

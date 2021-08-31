@@ -19,17 +19,28 @@ class ContactController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        if ($request->request->count()>0) {
+        if ($request->request->count()>2) {
             $contact = new Contact();
+            
+           if(($request->request->get('nomComplet')==null) || ($request->request->get('username')==null) || ($request->request->get('telephone')==null) || ($request->request->get('message')==null)){
+            $this->addFlash("dangerContact","Veuillez remplir tous les champs");
+            //return $this->redirectToRoute('home');
 
-           $contact->setNomComplet($request->request->get('nomComplet'))
-                   ->setUsername($request->request->get('username'))
-                   ->setTelephone($request->request->get('telephone'))
-                   ->setMessage($request->request->get('message'));
-            $entityManager->persist($contact);
-            $entityManager->flush();
+           }else{
+            $contact->setNomComplet($request->request->get('nomComplet'))
+            ->setUsername($request->request->get('username'))
+            ->setTelephone($request->request->get('telephone'))
+            ->setMessage($request->request->get('message'));
+     $entityManager->persist($contact);
+     $entityManager->flush();
 
 
+     return $this->redirectToRoute('home');
+           }
+           
+
+        }else{
+            $this->addFlash("dangerContact","Veuillez remplir tous les champs");
             return $this->redirectToRoute('home');
 
         }
