@@ -110,6 +110,16 @@ class DocumentRepository extends ServiceEntityRepository
         ->getResult()
     ;
 }
+public function findCount($value)
+{
+    return $this->createQueryBuilder('d')
+        ->select('count(d.id)')
+        ->andWhere('d.categorie = :val')
+        ->setParameter('val', $value)
+        ->getQuery()
+        ->getResult()
+    ;
+}
 
 
     // /**

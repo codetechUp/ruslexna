@@ -47,4 +47,14 @@ class DucumentRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.libelle = :val')
+            ->setParameter('val', $value)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

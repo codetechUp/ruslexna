@@ -41,17 +41,17 @@ class HomeController extends AbstractController
 
      $categories=$cat->findAll();
      $jur=$cat->findBy(['libelle'=> 'Juridique']);
-     $juridique=$doc->findByCat($jur);
+     $juridique=$doc->findCount($jur)[0][1];
      $jur=$cat->findBy(['libelle'=> 'Fiscal']);
-     $fiscal=$doc->findByCat($jur);
+     $fiscal=$doc->findCount($jur)[0][1];
      $jur=$cat->findBy(['libelle'=> 'Foncier']);
-     $foncier=$doc->findByCat($jur);
+     $foncier=$doc->findCount($jur)[0][1];
      $jur=$cat->findBy(['libelle'=> 'Social']);
-     $social=$doc->findByCat($jur);
+     $social=$doc->findCount($jur)[0][1];
      $jur=$cat->findBy(['libelle'=> 'Banques']);
-     $banque=$doc->findByCat($jur);
+     $banque=$doc->findCount($jur)[0][1];
      $jur=$cat->findBy(['libelle'=> 'Affaires']);
-     $affaire=$doc->findByCat($jur);
+     $affaire=$doc->findCount($jur)[0][1];
 
      if ($request->request->count()>2) {
         $contact = new Contact();
