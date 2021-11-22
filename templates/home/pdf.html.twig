@@ -1,5 +1,10 @@
 {% if doc %}
 {% extends 'base.html.twig' %} {% block body %}
+
+{% if app.user.role =="ROLE_ADMIN" %}
+<iframe   frameborder="0" width="100%" height="800"  allowfullscreen src="data:application/pdf;base64,{{ doc.fichier }}" type="application/pdf" ></iframe> 
+{% endif %}
+
 <iframe  id="blob" style="display:none" frameborder="0" allowfullscreen src="{{ doc.fichier }}" type="application/pdf" ></iframe> 
 
 <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>

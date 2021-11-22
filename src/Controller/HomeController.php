@@ -59,6 +59,9 @@ class HomeController extends AbstractController
        if(($request->request->get('nomComplet')==null) || ($request->request->get('username')==null) || ($request->request->get('telephone')==null) || ($request->request->get('message')==null)){
         $this->addFlash("dangerContact","Veuillez remplir tous les champs");
         //return $this->redirectToRoute('home');
+        echo '<script language="javascript">';
+        echo 'alert("Veuillez remplir tous les champs ")';
+        echo '</script>';
 
        }else{
            
@@ -84,9 +87,12 @@ class HomeController extends AbstractController
              $sms="yes";
              $entityManager->persist($contact);
         $entityManager->flush();
- 
-         $this->addFlash("success","Message envoyé avec succés ,");
-         return $this->redirectToRoute('home');
+          echo '<script language="javascript">';
+         echo 'alert("Message envoyé avec succés ")';
+         echo '</script>';
+
+       //  $this->addFlash("success","Message envoyé avec succés ,");
+        // return $this->redirectToRoute('home');
        }}
 
  
@@ -332,7 +338,13 @@ if(!$user){
                 }
             }
            
-           
+           if(count($docs)<1){
+           $empty=true;
+
+
+           }else{
+               $empty=false;
+           }
            $categories=$ca->findAll();
            $juridique=array();
            $foncier=array();
@@ -464,6 +476,7 @@ if(!$user){
             $search=" ";
             $foncier="";
             $affaires="";
+            $empty=false;
             return $this->render('home/try.html.twig', [
                 "mots"=>$search,
                 "categories"=>$categories,
@@ -475,7 +488,8 @@ if(!$user){
                'datepub'=>$datepub,
                "social"=>$social,
                "affaires"=>$affaires,
-               "banque"=>$banque
+               "banque"=>$banque,
+               'empty'=> $empty
                 ]);
         }
 
@@ -502,7 +516,8 @@ if(!$user){
            "fon"=>$fon,
            "aff"=>$aff,
            "ass"=>$ass,
-           "ban"=>$ban
+           "ban"=>$ban,
+           'empty'=> $empty
             ]);
     }
 }

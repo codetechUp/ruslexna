@@ -42,11 +42,15 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 pt-3">
             <p class="text-center  "> <b>  <i class="fas fa-file-alt"></i> RESULTAT(S) DE RECHERCHE</b>: pour le(s) mot(s) clé(s) <b>'{{ mots }}'</b> </p>
-            <hr class=" text-center " style="width: 60% ;background-color: gray;"> {% if juri %}
+          
+            <hr class=" text-center " style="width: 60% ;background-color: gray;"> 
+             {% if empty == true %} <p class="text-center"> Pas de résultats </p> {% endif %}
+            
+            {% if juri %}
 
             <!--Accordion wrapper-->
             <div class="accordion m-3 md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
-
+         
                 <!-- Accordion card -->
                 <div class="card">
 

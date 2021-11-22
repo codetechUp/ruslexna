@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Chatra {literal} -->
-    <script>
-        (function(d, w, c) {
-            w.ChatraID = 'pqR7Dj2Ghp2PhdKgf';
-            var s = d.createElement('script');
-            w[c] = w[c] || function() {
-                (w[c].q = w[c].q || []).push(arguments);
-            };
-            s.async = true;
-            s.src = 'https://call.chatra.io/chatra.js';
-            if (d.head) d.head.appendChild(s);
-        })(document, window, 'Chatra');
-    </script>
-    <!-- /Chatra {/literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'MqT9xme48HoAnWiKx';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
+
 <head>
 
   <meta charset="utf-8">
@@ -49,12 +50,12 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-          <!-- Sidebar Toggle (Topbar) -->
+          <!-- Sidebar Toggle (Topbar) 
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
-          </button>
+          </button>-->
 
-          <!-- Topbar Search -->
+          
               <div >
         <!-- Uncomment below if you prefer to use an image logo -->
        <h3><a href="/"><span><img  style="width:130px" src="{{asset('assets/img/Nasurlex-logo.png')}}"></span></a></h3>
@@ -66,9 +67,9 @@
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <!-- Topbar Search  <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
-              </a>
+              </a>-->
               <!-- Dropdown - Messages -->
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
       
@@ -85,15 +86,15 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ app.user.prenom }}</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
-              <!-- Dropdown - User Information -->
+              <!--                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+   Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
       
               
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="{{path('logout')}}" >
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                Déconnection
                 </a>
               </div>
             </li>
