@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Env;
 use App\Entity\Packs;
 use App\Form\PackType;
 use App\Entity\Document;
 use App\Form\DocumentType;
 use App\Entity\Subscription;
+use App\Repository\EnvRepository;
 use App\Repository\UserRepository;
 use App\Repository\PacksRepository;
 use App\Repository\DocumentRepository;
@@ -17,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -299,9 +302,71 @@ public function offrir(UserRepository $repo,Request $request)
 
 
 
+ /**
+     * @Route("/admin/mode-free", name="modefree")
+     */
+    
+    
+    public function mode(EnvRepository $repEnv,UserRepository $repo,Request $request)
+{
+    $em=$this->getDoctrine()->getManager();
+   $me=$this->getUser();
+    $role=$me->getRoles()[0];
+    $env=$repEnv->findAll();
+    if(!empty($env)){
+        $myFree=$env[0]->getFree();
+        if($myFree==true){
+            $free="Activer";
+        }else{
+            $free="Désactiver";
+        }
+    }else{
+        $newEnv=new Env();
+        $newEnv->setFree(false);
+        $em->persist($newEnv);
+        $em->flush();
+        $free="Désactiver";
+    }
+    
+    
+    
+    $form = $this->createFormBuilder(null)
 
+    ->add('Mode', ChoiceType::class, [
+        'choices' => [
+            'Activer'=>true,
+            'Désactiver.'=>false
+        ],
+    ])
+    ->add('Save',SubmitType::class)
+    ->getForm();
 
+    $form->handleRequest($request);
 
+    if ($form->isSubmitted() && $form->isValid()) {
 
+        $query=$form->get('Mode')->getData();
+        $env[0]->setFree($query);
+        $em->flush();
+        if($env[0]->getFree()==true){
+            $free="Activer";
+        }else{
+            $free="Désactiver";
+        }
+        $this->addFlash("success","Mode Gratuit $free");
+        return $this->redirectToRoute('dashbord');
+       
 
+       }
+
+       return $this->render('admin/modefree.html.twig', [
+        'form' => $form->createView(),
+        'free'=> $free
+    
+    ]);
+    
+
+   
 }
+}
+

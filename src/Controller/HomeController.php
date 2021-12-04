@@ -5,6 +5,7 @@ use DateTime;
 use App\Entity\User;
 use App\Entity\Contact;
 use App\Form\ResetPassType;
+use App\Repository\EnvRepository;
 use FOS\UserBundle\Mailer\Mailer;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Message;
@@ -234,10 +235,29 @@ class HomeController extends AbstractController
      /**
      * @Route("renderpdf/{id}", name="render")
      */
-    public function inx($id,DocumentRepository $repDoc,CategorieRepository $cat)
+    public function inx($id,DocumentRepository $repDoc,CategorieRepository $cat,EnvRepository $rEnv)
     {
         $user=$this->getUser();
         $jdate=new DateTime();
+        $env=$rEnv->findAll();
+        
+        if(!empty($env)){
+            if($env[0]->getFree()==true){
+
+                $categories=$cat->findAll();
+            $doc=$repDoc->find($id);
+            $pdfblob=stream_get_contents($doc->getFichier());
+            $pdf = base64_encode(($pdfblob));
+            $doc->setFichier($pdf);
+        return $this->render('home/pdf.html.twig', [
+            "doc"=>$doc,
+            "categories"=> $categories,
+            "date"=>date_format(new \DateTime(),"Y") ]);
+        
+
+            }
+        }
+
 //s'il n'est pas connecté
 if(!$user){
     $this->addFlash("success","Veuillez vous connecter ou vous inscrire pour lire un document");
@@ -267,7 +287,8 @@ if(!$user){
                     $doc->setFichier($pdf);
                    return $this->render('home/pdf.html.twig', [
                       "doc"=>$doc,
-                      "categories"=> $categories ]);
+                      "categories"=> $categories,
+                      "date"=>date_format(new \DateTime(),"Y") ]);
                 }else{
                     $this->addFlash("success","Votre abonnement ne vous permet pas de consulter ce document ");
                     $this->addFlash("success","Veuillez vous souscrire dans un autre packs! ");
@@ -297,6 +318,7 @@ if(!$user){
     
     
 }
+
 //sinon
        
     }
@@ -304,8 +326,8 @@ if(!$user){
      * @Route("recherche", name="recherche")
      */
     public function search(Request $request,DocumentRepository $doc,CategorieRepository $ca,SousCategorieRepository $sca){
-        
-        if ($request->request->count()>0) {
+        $empty=false;
+        if ($request->request->count()>0 && !empty($search)) {
             $search= $request->request->get('search');
             if(empty($search)){
                 return;
@@ -313,19 +335,24 @@ if(!$user){
 
             $cat= $request->request->get('categorie');
             $datepub= $request->request->get('datepub');
+           
             if(strstr($cat,'-')){
                 
                 $ex=explode('-',$cat);
                //On recuppere le categorie
                 $categorie=$ca->find($ex[0]);
                 //Ici le sous categorie
-                $souscategorie=$ca->find($ex[1]);
+                $souscategorie=$sca->find($ex[1]);
+                
                 //Si le champs date de publication n'est pas renseigné
                 if(!empty($datepub)){
                     //Search doc est une fonction cree dans le repository des documents
+                    
                     $docs = $doc->searchDoc($search,$cat,$souscategorie,$datepub);
                 }else{
+                    
                     $docs = $doc->searchDoc($search,$cat,$souscategorie);
+                    
                 }
                 
             }else{
@@ -338,13 +365,7 @@ if(!$user){
                 }
             }
            
-           if(count($docs)<1){
-           $empty=true;
-
-
-           }else{
-               $empty=false;
-           }
+           
            $categories=$ca->findAll();
            $juridique=array();
            $foncier=array();
