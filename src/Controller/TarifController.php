@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
+use Paydunya\Setup;
+use Paydunya\Checkout;
+use Paydunya\Paydunya;
+use Paydunya\Utilities;
+use Paydunya\CustomData;
 use Paydunya\Checkout\Store;
 use App\Repository\PacksRepository;
 use Paydunya\Checkout\CheckoutInvoice;
 use App\Repository\CategorieRepository;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Paydunya\Checkout;
-use Paydunya\CustomData;
-use Paydunya\Paydunya;
-use Paydunya\Setup;
-use Paydunya\Utilities;
+
 class TarifController extends AbstractController
 {
     
@@ -38,14 +40,14 @@ class TarifController extends AbstractController
      * @Route("/paiement/{id}", name="paiement")
      */
     public function paye($id,PacksRepository $repac){
-       if($this->getUser()){
+    if(!$this->getUser()){
         $pack=$repac->find($id);
         $idpack=$id;
-        $iduser=$this->getUser()->getId();
+       // $iduser=$this->getUser()->getId();
  //dump($_SERVER['HTTP_HOST']);
        // dd("http://".$_SERVER['HTTP_HOST']."/status/$idpack/$iduser");
      //Store::setReturnUrl("https://".$_SERVER['HTTP_HOST']."/status/$idpack/$iduser");       
-      Store::setReturnUrl("http://127.0.0.1:8000/status/".$idpack."/".$iduser);
+ /*     Store::setReturnUrl("http://127.0.0.1:8000/status/".$idpack."/".$iduser);
       Store::setLogoUrl("https://nasrulex.com/assets/img/Nasurlex-logo.png");
 Store::setName("NASRULEX"); // Seul le nom est requis
 Store::setTagline("Plateforme de Documentation Juridique");
@@ -66,25 +68,90 @@ Store::setLogoUrl("https://nasrulex.com/assets/img/Nasurlex-logo.png");
 Store::setName("NASRULEX"); // Seul le nom est requis
 Store::setTagline("Plateforme de Documentation Juridique");
 Store::setPhoneNumber("+221 77 377 77 66");
-Store::setWebsiteUrl("http://nasrulex.com");
+Store::setWebsiteUrl("http://nasrulex.com");*/
+
            
         $price=$pack->getPrice();
        
-        $invoice = new CheckoutInvoice();
+        //$invoice = new CheckoutInvoice();
         $total_amount = 0;
         
-        $invoice->addItem("PACK ".$pack->getLibelle(),1,$price,$price);
+        //$invoice->addItem("PACK ".$pack->getLibelle(),1,$price,$price);
         
-        $invoice->setTotalAmount($price);
+       // $invoice->setTotalAmount($price);
+        $testUrl='https://app.paydunya.com/sandbox-api/v1/checkout-invoice/create';
+        $proUrl='https://app.paydunya.com/api/v1/checkout-invoice/create';
        
+        $client = HttpClient::create();
+        $response = $client->request('POST', 'https://app.paydunya.com/sandbox-api/v1/checkout-invoice/create', 
+            [
+                'headers' => [
+                    'Content-Type' => 'application/json; charset=utf-8',
+                    'Accept' => 'application/json',
+                    'PAYDUNYA-MASTER-KEY' => 'sO4bJTB1-VGno-uwPH-HRMT-6C5H4kNFu8Qn',
         
-        if($invoice->create()) {
+                    // HTTP Basic authentication with a username and a password
+                    'PAYDUNYA-PRIVATE-KEY' => 'test_private_NHEmeiZn3nUAyq0sYprqRhJlYxH',
+                
+                    // HTTP Bearer authentication (also called token authentication)
+                    'PAYDUNYA-TOKEN' => 'FWqNtl4ydmUdpsCcSlKa',
+                ],
+                
+                'body' => json_encode(  [
+                    "invoice"=> [
+                        "items"=> [
+                            "item_0"=> [
+                                "name"=> "PACK ".$pack->getLibelle(),
+                                "quantity"=> 1,
+                                "unit_price"=> "$price",
+                                "total_price"=> "$price",
+                                "description"=> "Shoes made of genuine crocodile skin that hunts poverty"
+                            ],
+                
+                        ],
+                
+                        "taxes"=> [
+                
+                        ],
+                
+                        "total_amount"=> $price,
+                        "description"=> ""
+                    ],
+                
+                    "store"=> [
+                        "name"=> "NASRULEX",
+                        "tagline"=> "Plateforme de Documentation Juridique",
+                        "postal_address"=> "",
+                        "phone"=> "+221 77 377 77 66",
+                        "logo_url"=> "https://nasrulex.com/assets/img/Nasurlex-logo.png",
+                        "website_url"=> "http://nasrulex.com"
+                    ],
+                
+                    "custom_data"=> [
+                
+                    ],
+                
+                    "actions"=> [
+                        "cancel_url"=> "",
+                        "return_url"=> "",
+                        "callback_url"=> ""
+                    ]
+                ])
+
+              
+            ]
+        );
+        
+      dd( $response->toArray());
+        
+        
+      /*  if($invoice->create()) {
             
             return $this->redirect($invoice->getInvoiceUrl());
          
         }else{
            dd($invoice->response_text);
-        }
+        }*/
        }else{
         $this->addFlash("success","Veuillez vous inscrire avant de payer un pack");
 

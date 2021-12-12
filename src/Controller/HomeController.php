@@ -72,9 +72,9 @@ class HomeController extends AbstractController
         ->setMessage($request->request->get('message'));
      
         $message = (new \Swift_Message('Nasrulex Message'))
-                 // On attribue l'expéditeur
+                 // l'expéditeur
                  ->setFrom([$request->request->get('username') => $request->request->get('nomComplet')])
-                 // On attribue le destinataire
+                 // le destinataire
                  ->setTo("papasa97@gmail.com")
                  // On crée le texte avec la vue
                  ->setBody(
@@ -155,7 +155,7 @@ class HomeController extends AbstractController
             
             $user=$repuser->findOneBy(["email"=> $data["Email"]]);
             if(!$user){
-                $this->addFlash("danger","L 'utilisateur n'existe pas .Incrivez-vous! ");
+                $this->addFlash("danger","L 'utilisateur n'existe pas .Inscrivez-vous! ");
 
                 return $this->redirectToRoute('inscription');
             }
@@ -327,8 +327,9 @@ if(!$user){
      */
     public function search(Request $request,DocumentRepository $doc,CategorieRepository $ca,SousCategorieRepository $sca){
         $empty=false;
+        $search= $request->request->get('search');
         if ($request->request->count()>0 && !empty($search)) {
-            $search= $request->request->get('search');
+            
             if(empty($search)){
                 return;
             }
