@@ -82,7 +82,9 @@ Store::setWebsiteUrl("http://nasrulex.com");*/
         $testUrl='https://app.paydunya.com/sandbox-api/v1/checkout-invoice/create';
         $proUrl='https://app.paydunya.com/api/v1/checkout-invoice/create';
        
-        $client = HttpClient::create();
+        $client = HttpClient::create([
+            'verify_peer' => false, 'verify_host' => false
+        ]);
         $response = $client->request('POST', 'https://app.paydunya.com/sandbox-api/v1/checkout-invoice/create', 
             [
                 'headers' => [
@@ -90,11 +92,10 @@ Store::setWebsiteUrl("http://nasrulex.com");*/
                     'Accept' => 'application/json',
                     'PAYDUNYA-MASTER-KEY' => 'sO4bJTB1-VGno-uwPH-HRMT-6C5H4kNFu8Qn',
         
-                    // HTTP Basic authentication with a username and a password
                     'PAYDUNYA-PRIVATE-KEY' => 'test_private_NHEmeiZn3nUAyq0sYprqRhJlYxH',
                 
-                    // HTTP Bearer authentication (also called token authentication)
                     'PAYDUNYA-TOKEN' => 'FWqNtl4ydmUdpsCcSlKa',
+                    
                 ],
                 
                 'body' => json_encode(  [
